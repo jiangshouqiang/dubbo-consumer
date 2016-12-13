@@ -1,0 +1,48 @@
+group 'dubbo-consumer'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'gs-rest-service'
+    version = '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://localhost:8081/repository/maven-public/'
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web",
+            "jiang:dubbo-interface:1.2")
+
+    //    dubbo
+    compile("com.alibaba:dubbo:2.5.3") {
+        exclude(module: "spring")
+    }
+
+    compile("com.101tec:zkclient:0.9") {
+        exclude(module: "slf4j-api")
+        exclude(module: "log4j")
+        exclude(module: "slf4j-log4j12")
+    }
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}

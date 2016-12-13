@@ -1,0 +1,14 @@
+server:
+  port: 5014
+
+dubbo:
+  application:
+    name:dubbo-consumer
+    logger:slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    register: true
+  protocol:
+    name: dubbo
+    port: 58121
+  scan: com.gr.jiang.*.impl
